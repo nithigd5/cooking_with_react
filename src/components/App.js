@@ -1,12 +1,32 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import RecipeList from './RecipeList'
 import '../css/app.css'
 import { v4 as uuidv4 } from 'uuid';
 
+const LS_RECIPES_KEY = "cooking_with_key.recipes"
+
 export const recipeContext = React.createContext()
 
 function App() {
+
   const [recipes, setRecipes] = useState(sampleRecipes)
+
+  useEffect(() => {
+    const LSRecipes = localStorage.getItem(LS_RECIPES_KEY)
+    if(LSRecipes!=null){
+      setRecipes(JSON.parse(LSRecipes))
+    }
+    
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem(LS_RECIPES_KEY,
+      JSON.stringify(recipes))
+
+      console.log("Mounted")
+      return ()=> console.log("unmounted")
+      
+  },[recipes])
 
   const recipeContextValue = {
     handleAddRecipe,
