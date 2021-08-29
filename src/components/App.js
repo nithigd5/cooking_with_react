@@ -15,7 +15,7 @@ function App() {
       instructions: "Sample Instructions",
       ingredients: [
       {
-        id: 1,
+        id: uuidv4(),
         name: 'Ingridient Name',
         amount: 'Total Amount'
       }]
