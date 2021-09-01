@@ -11,6 +11,9 @@ export const recipeContext = React.createContext()
 function App() {
 
   const [recipes, setRecipes] = useState(sampleRecipes)
+  const [selectedRecipeId, setSelectedRecipeId] = useState(null)
+
+  const selectedRecipe = recipes.find(recipe => recipe.id === selectedRecipeId )
 
   useEffect(() => {
     const LSRecipes = localStorage.getItem(LS_RECIPES_KEY)
@@ -31,7 +34,8 @@ function App() {
 
   const recipeContextValue = {
     handleAddRecipe,
-    handleRecipeDelete
+    handleRecipeDelete,
+    handleRecipeSelect
   }
   
   function handleAddRecipe(){
@@ -57,10 +61,16 @@ function App() {
     }))
   }
 
+  function handleRecipeSelect (id){
+    setSelectedRecipeId(id)
+  }
+
   return (
     <recipeContext.Provider value={recipeContextValue}>
-      <RecipeList recipes={recipes} />
-    <RecipeEdit/>
+      <RecipeList recipes={recipes}
+       handleRecipeSelect={handleRecipeSelect} 
+      />
+    { selectedRecipe && <RecipeEdit recipe={selectedRecipe} /> }
     </recipeContext.Provider>
   )
 }

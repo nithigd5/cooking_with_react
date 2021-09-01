@@ -49,7 +49,7 @@
 
 textarea.recipe-edit-input{
     resize: none;
-    height: auto;
+    height: 200px;
 }
 
 .ingridient-edit-grid{
