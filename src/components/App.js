@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import RecipeList from './RecipeList'
 import '../css/app.css'
 import { v4 as uuidv4 } from 'uuid';
+import RecipeEdit from './RecipeEdit'
 
 const LS_RECIPES_KEY = "cooking_with_key.recipes"
 
@@ -59,6 +60,7 @@ function App() {
   return (
     <recipeContext.Provider value={recipeContextValue}>
       <RecipeList recipes={recipes} />
+    <RecipeEdit/>
     </recipeContext.Provider>
   )
 }
